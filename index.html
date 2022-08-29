@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link type="text/css" rel="stylesheet" href="/tool/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="/tool/css/jquery.jscrollpane.css" />
+<link type="text/css" rel="stylesheet" href="/tool/css/qatoolapp.css" />
+</head>
+<body>
+<div id="messaging-container">
+	<div id="messaging"></div>
+	<div id="hardmessaging"></div>
+</div>
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="?lang=en_US">Data Dragon QA Interface (Clone/Backup)</a>
+      <ul class="nav">
+        <li class="dropdown">
+          <a href="#">Realm (4.20)<b class="caret"></b></a>
+        </li>
+        <li class="dropdown">
+          
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language (en_US)<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+						<li><a href="?lang=en_US">English US</a></li>
+						<li><a href="?lang=es_ES">Spanish</a></li>
+						<li><a href="?lang=fr_FR">French</a></li>
+						<li><a href="?lang=de_DE">German</a></li>
+						<li><a href="?lang=it_IT">Italian</a></li>
+						<li><a href="?lang=pl_PL">Polish</a></li>
+						<li><a href="?lang=el_GR">Greek</a></li>
+						<li><a href="?lang=ro_RO">Romanian</a></li>
+						<li><a href="?lang=pt_BR">Portuguese (Brazil)</a></li>
+						<li><a href="?lang=tr_TR">Turkish</a></li>
+						<li><a href="?lang=th_TH">Thai</a></li>
+						<li><a href="?lang=vn_VN">Vietnamese</a></li>
+						<li><a href="?lang=id_ID">Indonesian</a></li>
+						<li><a href="?lang=ru_RU">Russian</a></li>
+						<li><a href="?lang=ko_KR">Korean</a></li>
+						<li><a href="?lang=zh_CN">Chinese (China)</a></li>
+						<li><a href="?lang=zh_TW">Chinese (Taiwan)</a></li>
+			          </ul>
+        </li>
+      </ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/tool/js/jquery-1.7.1.min.js"></script>
+<div id="qaapptools">
+	<div class="fullqa">
+		<div class="describebtn">Data Type:</div>
+		<input id="champion-btn" class="btn btn-primary" type="button" onclick="switchData('champion')" value="Champions" /> &nbsp;
+		<input id="item-btn" class="btn" type="button" onclick="switchData('item')" value="Items" /> &nbsp;
+		<input id="rune-btn" class="btn" type="button" onclick="switchData('rune')" value="Runes" /> &nbsp;
+		<input id="mastery-btn" class="btn" type="button" onclick="switchData('mastery')" value="Mastery Tree" /> &nbsp;
+		<input id="summoner-btn" class="btn" type="button" onclick="switchData('summoner')" value="Summoner Spells" /> &nbsp;    
+		<!-- <input id="profileicon-btn" class="btn" type="button" onclick="switchData('profileicon')" value="Profile Icons" /> --> &nbsp; 
+	</div>
+	<div id="filter-bar" class="tool">
+		<div class="label">Filters</div>
+		<select id="filter-inverse">
+			<option></option>
+			<option>!</option>
+		</select>
+		<select id="filters"></select>
+		<select id="filter-ops">
+			<option>=</option>
+			<option>&lt;</option>
+			<option>&lt;=</option>
+			<option>></option>
+			<option>>=</option>
+			<option>*=</option>
+			<option>^=</option>
+			<option>$=</option>
+			<option>-></option>
+		</select>
+		<input type="text" id="filter-value"/>
+		<input type="button" id="add-filter" value="+"/>
+		<div id="currentFilters"></div>
+		<div>
+			<input type="button" class="btn" id="filtersclear" value="Clear Filters"/>
+			<input type="button" class="btn" id="allgetfull" value="Force All Get Full"/>
+		</div>
+	</div>
+	<div id="righttool" class="tool">
+		<div class="label">Search as you Type</div>
+		<input id="searchy"/>
+	</div>
+	<div id="sorttool" class="tool">
+		<div class="label">Sort By</div>
+		<select id="sortby"></select>
+	</div>
+</div>
+<div id="fullarea"></div>
+<input class="btn" id="clearls" type="btn" value="Clear Localstorage" />
+
+
+
+
+<script>
+realm = '4.20';
+rg_force_language = 'en_US';
+if ( isNaN(parseInt(realm.charAt(0), 10) ) )
+{ 
+	rg_force_manifest = '/realms/4.20.js';
+}
+else
+{
+	rg_force_manifest = '/lolpatch/4.20.js';
+}
+rg_force_reducereflow = true;
+</script>
+<script type="text/javascript" src="/cdn/dragonhead.js"></script>
+
+
+<script type="text/javascript" src="/tool/js/jquery.ext.js"></script>
+
+<script type="text/javascript" src="/tool/js/Riot/Riot.js"></script>
+<script type="text/javascript" src="/tool/js/Riot/Base.js"></script>
+<script type="text/javascript" src="/tool/js/Riot/ClassManager.js"></script>
+
+<script type="text/javascript" src="/tool/js/Riot/util/Observable.js"></script>
+<script type="text/javascript" src="/tool/js/Riot/dom/Element.js"></script>
+<script type="text/javascript" src="/tool/js/Riot/dom/element/JqueryTranslator.js"></script>
+
+<script type="text/javascript" src="/tool/js/Riot/Component.js"></script>
+
+<script type="text/javascript" src="/tool/js/qatool/ChampionApp.js"></script>
+<script type="text/javascript" src="/tool/js/qatool/ItemApp.js"></script>
+
+<script type="text/javascript" src="/tool/js/qatool/mastery/Item.js"></script>
+<script type="text/javascript" src="/tool/js/qatool/mastery/Tree.js"></script>
+<script type="text/javascript" src="/tool/js/qatool/mastery/Summoner.js"></script>
+<script type="text/javascript" src="/tool/js/qatool/mastery/App.js"></script>
+
+<script type="text/javascript" src="/tool/js/qatool/SummonerApp.js"></script>  
+        
+<script type="text/javascript" src="/tool/js/qatool/ProfileiconApp.js"></script>
+
+<script type="text/javascript" src="/tool/js/qatool/Filter.js"></script>
+
+<script type="text/javascript" src="/tool/js/qatoolapp.js"></script>
+
+
+
+
+
+<script type="text/javascript">window.setTimeout(function() { document.cookie = "_lcp3=a; Path=/; expires=Mon Mar 20 2034 13:02:58" }, 1000);</script></body>
+</html>
